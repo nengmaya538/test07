@@ -6,6 +6,49 @@
 
 
 <style>
+  /* SUPER STRONG anti overflow */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+img,
+video,
+iframe,
+table,
+pre,
+code,
+div,
+section,
+article {
+  max-width: 100% !important;
+  height: auto;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+table {
+  display: block;
+  overflow-x: auto;
+}
+
+pre,
+code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
 .spo {
   display: flex;
   flex-wrap: nowrap;
