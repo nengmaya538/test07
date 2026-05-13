@@ -146,7 +146,6 @@ layout: null
             white: "#ffffff"
         };
 
-        // CSS variables
         var styleCSS = ":root {";
         for (var key in colors) { styleCSS += "--" + key + ":" + colors[key] + ";"; }
         styleCSS += "--card-radius:8px;--card-shadow:0 2px 8px rgba(0,0,0,0.06);}";
@@ -155,14 +154,12 @@ layout: null
         styleEl.textContent = styleCSS;
         document.head.appendChild(styleEl);
 
-        // Avatar
         var avatarBg = genColor(0, 60, 50);
         var words = fullName.split("-"), initials = "";
         for (var w = 0; w < Math.min(words.length, 3); w++) { if (words[w].length > 0) initials += words[w].charAt(0).toUpperCase(); }
         if (initials.length < 2) initials = fullName.substring(0, 3).toUpperCase();
         document.getElementById("domainAvatar").innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"0 0 40 40\"><rect width=\"40\" height=\"40\" rx=\"20\" fill=\"" + avatarBg + "\"/><text x=\"20\" y=\"26\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"18\" font-weight=\"bold\" font-family=\"-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif\">" + initials + "</text></svg>";
 
-        // Header
         var header = document.getElementById("blogHeader");
         var headerBg = genColor(0, 50, 95);
         var headerText = textColorFor(headerBg);
@@ -173,7 +170,6 @@ layout: null
         if (menuBtn) menuBtn.style.color = headerText;
         document.querySelectorAll(".menu-icon-main").forEach(function(icon) { icon.style.stroke = headerText; });
 
-        // Font
         document.body.style.fontFamily = ["'Segoe UI', sans-serif", "'Inter', sans-serif", "-apple-system, sans-serif", "'Noto Sans', sans-serif"][domainHash % 4];
         document.body.style.background = genColor(0, 8, 97);
 
@@ -196,7 +192,6 @@ layout: null
         applySection(document.querySelector(".home-featured-main"), "c5", false);
         applySection(document.getElementById("footerPara"), "dark", true);
 
-        // Grid cards
         document.querySelectorAll(".home-grid-card").forEach(function(card) {
             var bg = genColor(120, 25, 94), txt = textColorFor(bg);
             card.style.background = bg; card.style.border = "1px solid " + genColor(120, 40, 80); card.style.color = txt;
@@ -204,7 +199,6 @@ layout: null
             card.querySelectorAll("p, .home-grid-desc").forEach(function(e) { e.style.color = txt === "#ffffff" ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.65)"; });
         });
 
-        // Latest cards
         document.querySelectorAll(".latest-card").forEach(function(card, idx) {
             var bg = colors[["c6","c7","c8","c9","c10","c11"][idx % 6]], txt = textColorFor(bg);
             card.style.background = bg; card.style.border = "none"; card.style.color = txt;
@@ -212,7 +206,6 @@ layout: null
             card.querySelectorAll(".latest-meta, .excerpt").forEach(function(e) { e.style.color = txt === "#ffffff" ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.6)"; });
         });
 
-        // Popular items
         document.querySelectorAll(".popular-item").forEach(function(item, idx) {
             var bg = colors[["c8","c9","c10","c11","c6","c7"][idx % 6]], txt = textColorFor(bg);
             item.style.background = bg; item.style.border = "none"; item.style.color = txt;
@@ -220,7 +213,6 @@ layout: null
             item.querySelectorAll("p, .excerpt").forEach(function(e) { e.style.color = txt === "#ffffff" ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.6)"; });
         });
 
-        // Country
         var countryParent = document.querySelector(".country-toggle").parentElement;
         if (countryParent) {
             var countryBg = genColor(210, 20, 94), countryTxt = textColorFor(countryBg);
@@ -235,11 +227,9 @@ layout: null
         var countryTitleText = document.querySelector(".section-title-country-text");
         if (countryTitleText) countryTitleText.textContent = ["Explore by Country","Destinations","Travel by Country","Countries","Browse by Country","Where to Go"][domainHash % 6];
 
-        // Must Read
         var mrt = document.querySelector("#homeFeaturedWrap h2");
         if (mrt) { mrt.textContent = ["Must Read","Editor's Pick","Featured","Top Pick","Recommended","Highlight"][domainHash % 6]; mrt.style.color = textColorFor(colors.c5); }
 
-        // Welcome
         var wp = document.getElementById("welcomePara");
         if (wp) wp.textContent = [
             "Welcome to " + title + " — discover amazing destinations and hidden gems.",
@@ -248,7 +238,6 @@ layout: null
             "Plan your adventure with " + title + " — top destinations and travel tips."
         ][domainHash % 4];
 
-        // Footer text
         var fp = document.getElementById("footerPara");
         if (fp) fp.textContent = [
             "Discover the beauty of the world through " + title + ".",
@@ -257,12 +246,10 @@ layout: null
             "Keep exploring with " + title + ". New guides added regularly."
         ][domainHash % 4];
 
-        // Hover
         document.querySelectorAll(".latest-card, .popular-item, .home-grid-card").forEach(function(card, idx) {
             card.classList.add(["hover-lift","hover-scale","hover-shadow"][(domainHash + idx) % 3]);
         });
 
-        // Section order
         var container = document.querySelector(".homepage-container");
         if (container) {
             container.style.display = "flex"; container.style.flexDirection = "column";
@@ -274,15 +261,12 @@ layout: null
             secs.forEach(function(sec, idx) { sec.style.order = orders[idx]; });
         }
 
-        // Latest layout
         var latestGrid = document.querySelector(".latest-grid");
         if (latestGrid) latestGrid.classList.add(["grid-3","grid-2","grid-3","list-row","grid-2","grid-3"][domainHash % 6]);
 
-        // Popular layout
         var popularList = document.getElementById("popularList");
         if (popularList) popularList.classList.add(["grid-2","list-1","grid-2","grid-4","list-1","grid-2"][domainHash % 6]);
 
-        // Country shuffle + layout
         var countryGrid = document.querySelector(".country-links");
         if (countryGrid) {
             var links = Array.from(countryGrid.querySelectorAll("a"));
@@ -292,14 +276,14 @@ layout: null
             countryGrid.classList.add(["grid-6","grid-4","grid-3","pills","list-2","masonry"][domainHash % 6]);
         }
 
-        // Menu toggle - FIXED
+        // MENU TOGGLE - no display:none
         var menuPanel = document.getElementById("blogMenuPanel");
         var toggleBtnBlog = document.getElementById("blogMenuToggle");
         var iconMenuBlog = document.getElementById("blogIconMenu");
         var iconCloseBlog = document.getElementById("blogIconClose");
 
         function updateBlogMenuPosition() {
-            if (menuPanel && menuPanel.style.display === "block" && toggleBtnBlog) {
+            if (menuPanel && menuPanel.classList.contains("show") && toggleBtnBlog) {
                 var btnRect = toggleBtnBlog.getBoundingClientRect();
                 menuPanel.style.top = (btnRect.bottom + 5) + "px";
                 menuPanel.style.right = (window.innerWidth - btnRect.right) + "px";
@@ -310,18 +294,18 @@ layout: null
             toggleBtnBlog.addEventListener("click", function(e) {
                 e.stopPropagation();
                 if (!menuPanel) return;
-                var isVisible = menuPanel.style.display === "block";
-                menuPanel.style.display = isVisible ? "none" : "block";
-                if (iconMenuBlog) iconMenuBlog.style.display = isVisible ? "inline" : "none";
-                if (iconCloseBlog) iconCloseBlog.style.display = isVisible ? "none" : "inline";
-                if (!isVisible) updateBlogMenuPosition();
+                menuPanel.classList.toggle("show");
+                var isVisible = menuPanel.classList.contains("show");
+                if (iconMenuBlog) iconMenuBlog.style.display = isVisible ? "none" : "inline";
+                if (iconCloseBlog) iconCloseBlog.style.display = isVisible ? "inline" : "none";
+                if (isVisible) updateBlogMenuPosition();
             });
         }
 
         document.addEventListener("click", function(e) {
-            if (menuPanel && toggleBtnBlog && menuPanel.style.display === "block") {
+            if (menuPanel && menuPanel.classList.contains("show")) {
                 if (!menuPanel.contains(e.target) && !toggleBtnBlog.contains(e.target)) {
-                    menuPanel.style.display = "none";
+                    menuPanel.classList.remove("show");
                     if (iconMenuBlog) iconMenuBlog.style.display = "inline";
                     if (iconCloseBlog) iconCloseBlog.style.display = "none";
                 }
@@ -329,8 +313,8 @@ layout: null
         });
 
         document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape" && menuPanel && menuPanel.style.display === "block") {
-                menuPanel.style.display = "none";
+            if (e.key === "Escape" && menuPanel && menuPanel.classList.contains("show")) {
+                menuPanel.classList.remove("show");
                 if (iconMenuBlog) iconMenuBlog.style.display = "inline";
                 if (iconCloseBlog) iconCloseBlog.style.display = "none";
             }
@@ -344,7 +328,7 @@ layout: null
     <style>
         :root{--c0:#0d6efd;--c1:#e8f1ff;--c2:#0d6efd;--c3:#0d6efd;--c4:#0d6efd;--c5:#0d6efd;--c6:#0d6efd;--c7:#0d6efd;--c8:#0d6efd;--c9:#0d6efd;--c10:#0d6efd;--c11:#0d6efd;--bg:#fafafa;--dark:#222;--white:#fff;--card-radius:8px;--card-shadow:0 2px 8px rgba(0,0,0,0.06);}
         
-        .blog-header-main.floating-header-main{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;box-sizing:border-box;position:fixed;top:0;left:0;right:0;z-index:1001;}
+        .blog-header-main.floating-header-main{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;box-sizing:border-box;position:fixed;top:0;left:0;right:0;z-index:1001;}
         .header-content-main{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto;gap:16px;}
         .domain-avatar-main{flex-shrink:0;line-height:0;}
         .blog-title-main{margin:0;font-size:20px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;}
@@ -352,11 +336,20 @@ layout: null
         .menu-btn-main{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:transparent;border:none;padding:0;cursor:pointer;}
         .menu-btn-main:hover{opacity:0.6;}
         .menu-icon-main{width:24px;height:24px;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
-        #blogMenuPanel{display:none;background:#fff;border:1px solid #e0e0e0;padding:16px;position:fixed;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.12);border-radius:10px;}
+        
+        #blogMenuPanel{
+            visibility:hidden;opacity:0;transform:translateY(-8px);
+            transition:all 0.2s ease;
+            background:#fff;border:1px solid #e0e0e0;padding:16px;
+            position:fixed;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,0.12);
+            border-radius:10px;pointer-events:none;
+        }
+        #blogMenuPanel.show{visibility:visible;opacity:1;transform:translateY(0);pointer-events:auto;}
         #blogMenuPanel ul{list-style:none;margin:0;padding:0;}
         #blogMenuPanel li{margin:0;padding:0;}
         #blogMenuPanel a{color:#000;text-decoration:none;display:block;border-radius:6px;padding:10px 14px;font-size:14px;transition:all 0.2s ease;font-weight:500;white-space:nowrap;}
         #blogMenuPanel a:hover{background:rgba(0,0,0,0.05);}
+        
         .header-spacer{height:60px;}
         .homepage-container{max-width:1200px;margin:0 auto;padding:1.5rem;}
 
@@ -435,7 +428,7 @@ layout: null
         .home-grid-desc{font-size:14px;line-height:1.7;margin:0;}
 
         @media(min-width:1025px){
-            .blog-header-main.floating-header-main{padding:12px 24px;}.header-content-main{max-width:1400px;}.blog-title-main{font-size:22px;}.menu-btn-main{width:40px;height:40px;}.menu-icon-main{width:26px;height:26px;}#blogMenuPanel{top:65px;right:24px;padding:20px;min-width:220px;max-width:250px;}.header-spacer{height:70px;}
+            .blog-header-main.floating-header-main{padding:12px 24px;}.header-content-main{max-width:1400px;}.blog-title-main{font-size:22px;}.menu-btn-main{width:40px;height:40px;}.menu-icon-main{width:26px;height:26px;}.header-spacer{height:70px;}
         }
         @media(max-width:1024px) and (min-width:769px){
             .latest-grid.grid-3{grid-template-columns:repeat(2,1fr);}.popular-list.grid-4{grid-template-columns:repeat(2,1fr);}
